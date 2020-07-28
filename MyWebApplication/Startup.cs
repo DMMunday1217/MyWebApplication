@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -7,11 +8,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
 using MyWebApplication.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using MySql.Data.MySqlClient;
+using SqlKata.Compilers;
+using SqlKata.Execution;
 
 namespace MyWebApplication
 {
@@ -34,6 +41,11 @@ namespace MyWebApplication
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddScoped(factory => new QueryFactory
+            {
+                Connection = new MySqlConnection("Host=localhost;Port=3306;User=root;Password=bNXQxUZt35VJcQSE;Database=test_database;SslMode=None"),
+                Compiler = new MySqlCompiler(),
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
