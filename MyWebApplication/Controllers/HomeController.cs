@@ -9,23 +9,23 @@ namespace MyWebApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly QueryFactory db;
+        private readonly QueryFactory _db;
 
         public HomeController(QueryFactory db, ILogger<HomeController> logger)
         {
-            this.db = db;
+            _db = db;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            db.Connection.Open();
-            var myName = db.Query("test_table")
+            _db.Connection.Open();
+            var myName = _db.Query("test_table")
                 .Where("id", 1)
                 .First<TestTable>();
 
             ViewData["myName"] = myName.Name;
-            db.Connection.Close();
+            _db.Connection.Close();
             return View();
         }
 
