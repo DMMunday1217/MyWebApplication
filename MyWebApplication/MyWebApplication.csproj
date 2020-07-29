@@ -23,4 +23,15 @@
         <PackageReference Include="SqlKata.Execution" Version="2.2.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update="Views\Finance\Index.cshtml">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Areas\Finance\Views" />
+    </ItemGroup>
+
 </Project>

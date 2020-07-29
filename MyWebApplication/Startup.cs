@@ -73,9 +73,15 @@ namespace MyWebApplication
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                    "finance_home",
+                    "Finance",
+                    "Finance/{controller=Finance}/{action=Index}/{id}");
+                
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "portfolio",
+                    "{controller=Home}/{action=Portfolio}");
                 endpoints.MapRazorPages();
             });
         }
